@@ -44,9 +44,6 @@ const startApollo = async () => {
   })
 };
 
-db.once('open', () => {
-  app.listen(PORT, () => console.log(`Now listening on localhost:${PORT}`));
-});
 
 startApollo();
 

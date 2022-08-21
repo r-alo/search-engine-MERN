@@ -10,7 +10,7 @@ const resolvers = {
             if (context.user) {
                 return User.findOne({ _id: context.user._id });
             }
-            throw new AuthenticationError('You need to be logged in!');
+            throw new AuthenticationError('You need to log in!');
         }
     },
 
@@ -18,11 +18,11 @@ const resolvers = {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
             if (!user) {
-                throw new AuthenticationError('Invalid credentials!');
+                throw new AuthenticationError('Invalid login!');
             }
             const passwordValidation = await user.isCorrectPassword(password);
             if (!passwordValidation) {
-                throw new AuthenticationError('Invalid credentials!');
+                throw new AuthenticationError('Invalid login!');
             }
             const token = signToken(user);
             return { token, user };
